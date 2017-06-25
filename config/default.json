@@ -6,5 +6,30 @@
     "default": 10,
     "max": 50
   },
-  "mongodb": "mongodb://localhost:27017/feathers_pong_api"
+  "mongodb": "mongodb://localhost:27017/feathers_pong_api",
+  "authentication": {
+    "secret": "c0e5be43642c1bb84ae688e912b62c4476237a88174d3e14d201068679dcacf36c8514ffc974f57628102c0fafb63324987357aeb6c0152fff2fdfc5a3be36d0288090bb5e84ae5dac5b91d8b4f24770cda213a08a2c03eab62b5e109c60ef744baa6dfec90b3b4da46b547f2bfe45e7c82e05cff5c4da58a8a37ce633ec557785e116b7714dd8fe0112150190b17192d2849faadcbb257b229340b79544fd330831e014e268c2c0797a84be25428f9c707373fe20eed4e8b68ca3d5d085a5fe7cc91d1d3780b8396ff1c9f768db8b3282c7f61a1895ee96320c13a19b0d42e6bd1098395770267d00a68ddbcb29e9541f97fcd7e62501014c760c08bd4a5245",
+    "strategies": [
+      "jwt",
+      "local"
+    ],
+    "path": "/authentication",
+    "service": "users",
+    "jwt": {
+      "header": {
+        "type": "access"
+      },
+      "audience": "https://yourdomain.com",
+      "subject": "anonymous",
+      "issuer": "feathers",
+      "algorithm": "HS256",
+      "expiresIn": "1d"
+    },
+    "local": {
+      "entity": "user",
+      "service": "users",
+      "usernameField": "email",
+      "passwordField": "password"
+    }
+  }
 }
