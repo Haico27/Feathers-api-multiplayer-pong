@@ -13,6 +13,7 @@ module.exports = function (app) {
 
 
   const games = new mongooseClient.Schema({
+    title: { type: String },
     players: [playerSchema],
     winnerId: { type: mongooseClient.Schema.Types.ObjectId, ref: 'users' },
     authorId: { type: mongooseClient.Schema.Types.ObjectId, ref: 'users'},

@@ -1,5 +1,17 @@
 const { authenticate } = require('feathers-authentication').hooks;
 const { restrictToOwner, associateCurrentUser, restrictToAuthenticated } = require('feathers-authentication-hooks');
+const { populate } = require('feathers-hooks-common');
+
+//Configure where we will get the author data from (the users service),
+//how to fetch it (by authorId), and where to put it (author)
+const authorSchema = {
+  include: {
+    service: 'users',
+    nameAs: 'author',
+    parentField: 'authorId',
+    childField: '_id'
+  }
+};
 
 const restrict = [
   authenticate('jwt'),
@@ -30,7 +42,9 @@ module.exports = {
   },
 
   after: {
-    all: [],
+    all: [
+      populate({ schema: authorSchema })
+    ],
     find: [],
     get: [],
     create: [],
